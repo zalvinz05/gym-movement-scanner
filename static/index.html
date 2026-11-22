@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Squat Scan</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <main class="card">
+    <header>
+      <p class="tag">MOVEMENT ANALYSIS / 01</p>
+      <h1>SQUAT_<span>SCAN</span></h1>
+      <p class="subtitle">Upload a frame or short clip for a knee depth check.</p>
+    </header>
+    <form id="form" class="upload">
+      <input id="file" type="file" accept="image/jpeg,image/png,video/mp4" required>
+      <label for="file" class="select-file">SELECT FILE</label>
+      <span id="filename" class="filename">NO FILE SELECTED</span>
+      <button id="analyze" disabled>ANALYZE</button>
+    </form>
+    <p id="message" class="message" role="status" aria-live="polite"></p>
+    <section class="columns">
+      <div class="preview-area">
+        <div id="placeholder" class="placeholder">NO MEDIA LOADED</div>
+        <div id="video-stage" class="video-stage" hidden><video id="video" controls hidden></video><canvas id="video-overlay"></canvas></div>
+        <img id="image" alt="Uploaded squat" hidden>
+      </div>
+      <section class="results-area" aria-label="Analysis results">
+        <div id="awaiting" class="awaiting">AWAITING INPUT</div>
+        <div id="summary"></div>
+        <div id="table-wrap"></div>
+        <canvas id="chart" aria-label="Knee angle by sampled frame" hidden></canvas>
+      </section>
+    </section>
+    <footer>POSE ESTIMATE <span>·</span> UPLOAD ONLY</footer>
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+</html>
