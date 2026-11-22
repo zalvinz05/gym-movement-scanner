@@ -1,73 +1,59 @@
-# Squat Scan
+# 🏋️ Gym Movement Scanner
 
-A small local web app that estimates squat depth and posture from an uploaded image or MP4 video. It uses MediaPipe Pose to detect body landmarks, OpenCV to process media, and a browser interface to show the preview and results.
+AI-powered squat form analysis from a photo or short video. Works from **front view** and **side view**.
 
-> This is an experimental pose-estimation demo, not medical advice or a substitute for coaching. Camera angle, lighting, occlusion, and clothing can affect its estimates.
+### 👉 [Try the live demo](https://gym-movement-scanner.onrender.com)
+> Hosted on a free server, so the first load can take ~50 seconds to wake up.
 
-## Features
+🎥 [Watch the demo video](Squat%20Scan%20Demo%20Video.mp4)
 
-- Analyze a JPG or PNG image, or an MP4 video.
-- Show a pose overlay and knee/back angle estimates.
-- Summarize detected repetitions and estimated depth for videos.
-- Run locally with Flask.
+## ✨ Features
+- Upload a JPG, PNG, or MP4 and get results in seconds
+- Pose overlay with **knee angle** and **back angle**
+- Automatic rep detection with depth verdict (GOOD / SHALLOW) per rep
+- Knee-angle graph across the whole clip
+- Works from front and side camera views
 
-## Requirements
+## 🛠️ Tech Stack
+![Python](https://img.shields.io/badge/Python-3.12-blue)
+![Flask](https://img.shields.io/badge/Flask-3.1-black)
+![MediaPipe](https://img.shields.io/badge/MediaPipe-Pose-green)
+![OpenCV](https://img.shields.io/badge/OpenCV-4.11-red)
+![Docker](https://img.shields.io/badge/Docker-ready-2496ED)
 
-- Python with support for the pinned MediaPipe version (the project was run with Python 3.12).
-- `pip`.
-
-## Setup
-
-Clone the repository, then open a terminal in the project directory.
-
-### Windows PowerShell
-
-```powershell
+## 🚀 Run Locally
+```bash
+git clone https://github.com/zalvinz05/gym-movement-scanner.git
+cd gym-movement-scanner
 py -3.12 -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
+.venv\Scripts\activate
 pip install -r requirements.txt
-```
-
-### macOS / Linux
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install --upgrade pip
-pip install -r requirements.txt
-```
-
-## Run
-
-Start the Flask development server from the project directory:
-
-```bash
 python app.py
 ```
+Open http://127.0.0.1:5000
 
-Open [http://127.0.0.1:5000](http://127.0.0.1:5000), select a JPG, PNG, or MP4 file, and click **Analyze**. Press `Ctrl+C` in the terminal to stop the server.
-
-The server accepts uploads up to 100 MB. Video analysis samples frames to keep processing bounded; results are estimates and may vary with the recording.
-
-## Project structure
-
+## 📁 Project Structure
 ```text
-.
-├── app.py                 # Flask routes and pose/video analysis
-├── requirements.txt       # Python dependencies
-└── static/
-    ├── index.html         # App page
-    ├── app.js             # Upload flow, playback overlay, and result rendering
-    └── style.css          # Layout and visual styles
+├── app.py              # Flask routes + pose/video analysis
+├── requirements.txt    # Dependencies
+├── Dockerfile          # Deployment (Render)
+└── static/             # Frontend (HTML, JS, CSS)
 ```
 
-## Troubleshooting
+## ⚠️ Known Limitations
+- Rep counter can miss reps (e.g. counted 1 rep on a 2-rep clip)
+- Estimates depend on camera angle, lighting, and full-body visibility
+- Free hosting has limited memory, so keep clips under ~15 seconds
+- Heuristic guidance only, **not medical advice**
 
-- If `python` is not found on Windows, try `py -3.12 app.py`.
-- If a dependency fails to install, confirm that your Python version is supported by the pinned MediaPipe release, then recreate the virtual environment and install `requirements.txt` again.
-- For more reliable pose estimates, use a clear side view with the full body visible and good lighting.
+## 🗺️ Future Work
+- More accurate rep detection
+- Real-time webcam mode
+- More lifts (deadlift, lunge, push-up)
+- Front-view specific checks (knee cave, left/right balance)
 
-## License
+## 🤝 Contributing
+This is an early POC and **feedback is welcome**! Test it with your own videos, open an issue if something's off, or fork it and send a pull request. Let's build this together.
 
-No license is currently specified. Add a `LICENSE` file before redistributing this project under open-source terms.
+## 📄 License
+MIT, see [LICENSE](LICENSE).
