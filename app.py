@@ -136,7 +136,7 @@ def analyze():
                     item = pose_result(image.copy(), pose, chosen_side)
                     if item:
                         angles.append(item["angle"]); confidences.append(item["confidence"])
-                        backs.append(item["back"]); frames.append(item["annotated"])
+                        backs.append(item["back"]); frames.append(cv2.imencode(".jpg", item["annotated"])[1].tobytes())
                         samples.append(dict(t=round(frame / fps, 3), knee=round(item["angle"], 3),
                                             back=round(item["back"], 3), vis=round(item["confidence"], 3),
                                             pts=item["pts"]))
@@ -175,7 +175,7 @@ def analyze():
         deepest = int(np.argmin(smooth_angles))
         return jsonify(type="video", reps=reps, angles=[round(a, 1) for a in angles],
                        total_reps=len(reps), back_angle=round(backs[deepest], 1),
-                       annotated=encoded(frames[deepest]), frames=samples, fps=round(fps, 3))
+                       annotated=base64.b64encode(frames[deepest]).decode("ascii"), frames=samples, fps=round(fps, 3))
     except Exception as exc:
         return jsonify(error=f"Could not analyze file: {exc}"), 400
     finally:
