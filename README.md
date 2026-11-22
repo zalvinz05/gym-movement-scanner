@@ -5,6 +5,8 @@ AI-powered squat form analysis from a photo or short video. Works from **front v
 ### 👉 [Try the live demo](https://gym-movement-scanner.onrender.com)
 > Hosted on a free server, so the first load can take ~50 seconds to wake up.
 
+![Demo](demo.png)
+
 🎥 [Watch the demo video](Squat%20Scan%20Demo%20Video.mp4)
 
 ## ✨ Features
